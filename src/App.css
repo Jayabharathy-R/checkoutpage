@@ -8,8 +8,10 @@
   font-size: 15px;
   word-spacing: 2px;
   text-align: center;
-  margin-right: 50px;
-  
+position: sticky;
+right: 20px;
+  /* margin-right: 50px;
+   */
 }
 #count{
   border: 1px solid black;
@@ -19,6 +21,12 @@
   background-color: black;
   color: white;
 }
+.div{
+  background-color: lightgrey; 
+  padding-top: 10px;
+  text-align: right;
+  padding-right:10px;
+}
 .sale{
   background-color: black;
   color: white;
@@ -26,8 +34,7 @@
   padding: 2px 5px;
   border-radius: 15%;
   position: relative;
-  bottom: 60px;
-  left:180px;
+  
 }
 table,tr,td,th{
   padding: 20px;

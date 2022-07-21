@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import './App.css';
 
-import { styled } from '@mui/material/styles';
+
 import {
   AppBar,
   Box,
@@ -13,7 +13,7 @@ import {
   Container,
   Button,
   MenuItem,
-  Paper,
+  
   Grid,
   Card,
   CardActions,
@@ -61,9 +61,9 @@ export default function App() {
 
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
   const value = 5;
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = useState([]);
 
 
   const handleOpenNavMenu = (event) => {
@@ -74,29 +74,29 @@ export default function App() {
   };
 
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+ 
+  const handleChange = async (e) => {
 
-  const handlechange = async (e) => {
 
    if (e.target.textContent === "Add to Cart") {
+   
       setCount(count + 1);
-      e.target.textContent = "Remove";
+      e.target.textContent ="Remove";
+      console.log(e.target.textContent);
+      
       const cartItem = data.filter(items => e.target.id === items.id);
-      await setItems([...items, cartItem]);
-     //console.log(items)
+      //console.log(cartItem)
+      await setItems([...items, cartItem[0]]);
+     console.log(items)
 
 
     }
-    else if (e.target.textContent === "Remove") {
+    else if (e.target.textContent ==="Remove") {
+     
+     e.target.textContent = "Add to Cart";
       setCount(count - 1);
-      e.target.textContent = "Add to Cart";
-      const itemsAfterRemoved = items.filter(items => e.target.id !== items.id);
+      const itemsAfterRemoved =items.filter(items => e.target.id !== items.id);
+      console.log(itemsAfterRemoved)
       await setItems([itemsAfterRemoved]);
 
 
@@ -201,8 +201,8 @@ export default function App() {
       </div>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={3} style={{ padding: "50px" }}>
-          <Grid item xs={3}>
-            <Item> <Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+             <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
                 <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
                   450 x 300
@@ -218,15 +218,18 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "75px" }}>View Options</Button>
+                <Button variant="outlined" sx={{ margin: "auto"}}>View Options</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item> <Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+             <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
-                <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
-                  <span class="sale">sale</span>450 x 300
+              <div  class="div">
+                <span class="sale">sale</span>
+                </div>
+                <Typography sx={{ fontSize: 30, height: "70px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
+                  450 x 300
                 </Typography>
                 <Typography variant="h5" component="div">
                   Special Item
@@ -238,15 +241,20 @@ export default function App() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "75px" }} id="1" name="Popular Item" value={18} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }} id="1"
+                 onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item><Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+            <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
-                <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
-                  <span class="sale">sale</span>450 x 300
+                <div  class="div">
+                <span class="sale">sale</span>
+                </div>
+              
+                <Typography sx={{ fontSize: 30, height: "70px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
+                  450 x 300
                 </Typography>
                 <Typography variant="h5" component="div">
                   Sale Item
@@ -259,12 +267,12 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "80px" }} id="2" name="Sale Item" value={25} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto"}} id="2" onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item><Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+            <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
                 <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
                   450 x 300
@@ -281,15 +289,18 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "80px" }} id="3" name="Popular Item" value={40} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }} id="3" onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item><Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+            <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
-                <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
-                  <span class="sale">sale</span>450 x 300
+              <div  class="div">
+                <span class="sale">sale</span>
+                </div>
+                <Typography sx={{ fontSize: 30, height: "70px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
+                  450 x 300
                 </Typography>
                 <Typography variant="h5" component="div">
                   Sale Item
@@ -302,12 +313,12 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "80px" }} id="4" name="Sale Item" value={25} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }} id="4" onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item> <Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+             <Card sx={{ height: 400, paddingBottom: "20px" }}>
               <CardContent>
 
                 <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
@@ -325,15 +336,18 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "75px" }}>View Options</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }}>View Options</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item> <Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+             <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
-                <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
-                  <span class="sale">sale</span>450 x 300
+              <div  class="div">
+                <span class="sale">sale</span>
+                </div>
+                <Typography sx={{ fontSize: 30, height: "70px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
+                  450 x 300
                 </Typography>
                 <Typography variant="h5" component="div">
                   Special Item
@@ -345,12 +359,12 @@ export default function App() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "75px" }} id="5" name="Special Item" value={18} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }} id="5" onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
-          <Grid item xs={3}>
-            <Item><Card sx={{ minWidth: 275, height: 400, paddingBottom: "20px" }}>
+          <Grid item xs={6} sm={4} md={3}>
+            <Card sx={{  height: 400, paddingBottom: "20px" }}>
               <CardContent>
                 <Typography sx={{ fontSize: 30, height: "100px", backgroundColor: "lightgray", padding: "50px 25px" }} color="text.secondary" gutterBottom>
                   450 x 300
@@ -367,9 +381,9 @@ export default function App() {
 
               </CardContent>
               <CardActions>
-                <Button variant="outlined" sx={{ marginLeft: "80px" }} id="6" name="Popular Item" value={40} onClick={(e) => handlechange(e)}>Add to Cart</Button>
+                <Button variant="outlined" sx={{ margin: "auto" }} id="6" onClick={(e) => handleChange(e)}>Add to Cart</Button>
               </CardActions>
-            </Card></Item>
+            </Card>
           </Grid>
         </Grid>
       </Box>
